@@ -1,0 +1,39 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#1a1a1a; color:#e0e0e0; font-family:'Segoe UI', sans-serif; }
+#app { max-width:1000px; margin:auto; min-height:100vh; display:flex; flex-direction:column; }
+header { background:#2a2a2a; padding:1rem; display:flex; justify-content:space-between; align-items:center; }
+h1 { color:#58cc02; }
+#tabs { display:flex; gap:0.3rem; flex-wrap:wrap; }
+.tab { background:#3a3a3a; border:none; color:#ddd; padding:0.5rem 1rem; cursor:pointer; border-radius:8px 8px 0 0; }
+.tab.active { background:#58cc02; color:white; }
+.view { display:none; padding:1rem; flex:1; }
+.view.active { display:block; }
+.btn { border:none; border-radius:8px; padding:0.5rem 1rem; cursor:pointer; margin:0.3rem; }
+.btn.primary { background:#58cc02; color:white; }
+.btn.secondary { background:#4a4a4a; color:white; }
+canvas { width:100%; max-width:600px; background:#222; border-radius:8px; margin:1rem 0; }
+
+/* DJ */
+.deck { background:#2a2a2a; border-radius:12px; padding:1rem; margin:0.5rem 0; }
+.crossfader-section { text-align:center; margin:1rem 0; }
+#crossfader { width:80%; }
+
+/* Beat sequencer */
+#sequencer { margin:1rem 0; }
+.track { display:flex; align-items:center; margin:0.3rem 0; gap:0.5rem; }
+.track span { width:50px; }
+.steps { display:flex; gap:2px; }
+.step { width:25px; height:25px; background:#3a3a3a; border-radius:4px; cursor:pointer; }
+.step.active { background:#58cc02; }
+.step.current { box-shadow:0 0 0 2px white; }
+
+/* Mixer channels */
+#mixer { display:flex; align-items:flex-end; gap:1rem; flex-wrap:wrap; justify-content:center; }
+.channel { background:#2a2a2a; border-radius:12px; padding:0.8rem; display:flex; flex-direction:column; align-items:center; gap:0.3rem; width:80px; }
+input[orient="vertical"] { writing-mode:bt-lr; -webkit-appearance:slider-vertical; width:20px; height:120px; }
+.mute-btn, .solo-btn { width:30px; height:30px; border-radius:50%; background:#4a4a4a; border:none; color:white; cursor:pointer; }
+.mute-btn.active { background:#f00; }
+
+/* Mastering */
+.eq-band, .compressor { margin:1rem 0; }
+.eq-band label, .compressor label { display:inline-block; width:120px; }
