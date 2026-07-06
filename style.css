@@ -1,39 +1,43 @@
-* { margin:0; padding:0; box-sizing:border-box; }
-body { background:#1a1a1a; color:#e0e0e0; font-family:'Segoe UI', sans-serif; }
-#app { max-width:1000px; margin:auto; min-height:100vh; display:flex; flex-direction:column; }
-header { background:#2a2a2a; padding:1rem; display:flex; justify-content:space-between; align-items:center; }
-h1 { color:#58cc02; }
-#tabs { display:flex; gap:0.3rem; flex-wrap:wrap; }
-.tab { background:#3a3a3a; border:none; color:#ddd; padding:0.5rem 1rem; cursor:pointer; border-radius:8px 8px 0 0; }
-.tab.active { background:#58cc02; color:white; }
-.view { display:none; padding:1rem; flex:1; }
-.view.active { display:block; }
-.btn { border:none; border-radius:8px; padding:0.5rem 1rem; cursor:pointer; margin:0.3rem; }
-.btn.primary { background:#58cc02; color:white; }
-.btn.secondary { background:#4a4a4a; color:white; }
-canvas { width:100%; max-width:600px; background:#222; border-radius:8px; margin:1rem 0; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#121212;color:#e0e0e0;font-family:'Segoe UI',sans-serif;}
+#app{max-width:1000px;margin:auto;min-height:100vh;display:flex;flex-direction:column;}
+header{background:#1f1f1f;padding:1rem;display:flex;justify-content:space-between;align-items:center;}
+h1{color:#58cc02;}
+#tabs{display:flex;gap:0.3rem;flex-wrap:wrap;}
+.tab{background:#2a2a2a;border:none;color:#ccc;padding:0.6rem 1.2rem;cursor:pointer;border-radius:8px 8px 0 0;}
+.tab.active{background:#58cc02;color:#121212;}
+.view{display:none;padding:1.2rem;flex:1;}
+.view.active{display:block;}
 
-/* DJ */
-.deck { background:#2a2a2a; border-radius:12px; padding:1rem; margin:0.5rem 0; }
-.crossfader-section { text-align:center; margin:1rem 0; }
-#crossfader { width:80%; }
+.btn{border:none;border-radius:8px;padding:0.5rem 1.2rem;cursor:pointer;margin:0.3rem;font-weight:bold;}
+.btn.primary{background:#58cc02;color:#121212;}
+.btn.secondary{background:#3a3a3a;color:#fff;}
+
+/* DJ view */
+.decks-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.deck{background:#1f1f1f;border-radius:12px;padding:1rem;text-align:center;flex:1;}
+.slider-group{margin-top:0.5rem;}
+.crossfader-section{display:flex;flex-direction:column;align-items:center;}
+#crossfader{writing-mode:bt-lr;-webkit-appearance:slider-vertical;height:150px;width:30px;}
 
 /* Beat sequencer */
-#sequencer { margin:1rem 0; }
-.track { display:flex; align-items:center; margin:0.3rem 0; gap:0.5rem; }
-.track span { width:50px; }
-.steps { display:flex; gap:2px; }
-.step { width:25px; height:25px; background:#3a3a3a; border-radius:4px; cursor:pointer; }
-.step.active { background:#58cc02; }
-.step.current { box-shadow:0 0 0 2px white; }
+#sequencer{margin:1rem 0;}
+.track{display:flex;align-items:center;margin:0.3rem 0;gap:0.5rem;}
+.track span{width:50px;}
+.steps{display:flex;gap:2px;}
+.step{width:28px;height:28px;background:#2a2a2a;border-radius:4px;cursor:pointer;}
+.step.active{background:#58cc02;}
+.step.current{box-shadow:0 0 0 2px #fff;}
 
-/* Mixer channels */
-#mixer { display:flex; align-items:flex-end; gap:1rem; flex-wrap:wrap; justify-content:center; }
-.channel { background:#2a2a2a; border-radius:12px; padding:0.8rem; display:flex; flex-direction:column; align-items:center; gap:0.3rem; width:80px; }
-input[orient="vertical"] { writing-mode:bt-lr; -webkit-appearance:slider-vertical; width:20px; height:120px; }
-.mute-btn, .solo-btn { width:30px; height:30px; border-radius:50%; background:#4a4a4a; border:none; color:white; cursor:pointer; }
-.mute-btn.active { background:#f00; }
+/* Mixer */
+.channel-strips{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;}
+.channel{background:#1f1f1f;border-radius:12px;padding:0.8rem;display:flex;flex-direction:column;align-items:center;gap:0.3rem;width:80px;}
+input[type="range"]{width:100%;}
+.mute-btn,.solo-btn{width:28px;height:28px;border-radius:50%;background:#2a2a2a;border:none;color:#fff;cursor:pointer;}
+.mute-btn.active,.solo-btn.active{background:#f00;}
+
+canvas{width:100%;max-width:600px;background:#1f1f1f;border-radius:8px;margin:1rem 0;}
 
 /* Mastering */
-.eq-band, .compressor { margin:1rem 0; }
-.eq-band label, .compressor label { display:inline-block; width:120px; }
+.eq-section,.compressor-section{margin:1rem 0;}
+.eq-band,.compressor-section label{display:block;margin:0.5rem 0;}
