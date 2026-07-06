@@ -1,43 +1,59 @@
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:#121212;color:#e0e0e0;font-family:'Segoe UI',sans-serif;}
-#app{max-width:1000px;margin:auto;min-height:100vh;display:flex;flex-direction:column;}
-header{background:#1f1f1f;padding:1rem;display:flex;justify-content:space-between;align-items:center;}
-h1{color:#58cc02;}
-#tabs{display:flex;gap:0.3rem;flex-wrap:wrap;}
-.tab{background:#2a2a2a;border:none;color:#ccc;padding:0.6rem 1.2rem;cursor:pointer;border-radius:8px 8px 0 0;}
-.tab.active{background:#58cc02;color:#121212;}
-.view{display:none;padding:1.2rem;flex:1;}
-.view.active{display:block;}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#0d0d0d; color:#e0e0e0; font-family:'Segoe UI', sans-serif; overflow-x:hidden; }
 
-.btn{border:none;border-radius:8px;padding:0.5rem 1.2rem;cursor:pointer;margin:0.3rem;font-weight:bold;}
-.btn.primary{background:#58cc02;color:#121212;}
-.btn.secondary{background:#3a3a3a;color:#fff;}
+/* Unlock overlay */
+#unlock-overlay {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.9); display:flex; align-items:center; justify-content:center;
+  z-index:1000;
+}
+#unlock-btn {
+  background:#58cc02; color:#0d0d0d; font-size:2rem; font-weight:bold;
+  border:none; border-radius:20px; padding:1.5rem 3rem; cursor:pointer;
+  box-shadow:0 0 30px #58cc02; transition:0.2s;
+}
+#unlock-btn:hover { transform:scale(1.05); }
 
-/* DJ view */
-.decks-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
-.deck{background:#1f1f1f;border-radius:12px;padding:1rem;text-align:center;flex:1;}
-.slider-group{margin-top:0.5rem;}
-.crossfader-section{display:flex;flex-direction:column;align-items:center;}
-#crossfader{writing-mode:bt-lr;-webkit-appearance:slider-vertical;height:150px;width:30px;}
+#app { display:none; max-width:1000px; margin:auto; min-height:100vh; flex-direction:column; }
 
-/* Beat sequencer */
-#sequencer{margin:1rem 0;}
-.track{display:flex;align-items:center;margin:0.3rem 0;gap:0.5rem;}
-.track span{width:50px;}
-.steps{display:flex;gap:2px;}
-.step{width:28px;height:28px;background:#2a2a2a;border-radius:4px;cursor:pointer;}
-.step.active{background:#58cc02;}
-.step.current{box-shadow:0 0 0 2px #fff;}
+header { background:#1a1a1a; padding:1rem; display:flex; justify-content:space-between; align-items:center; }
+h1 { color:#58cc02; }
+
+#tabs { display:flex; gap:0.3rem; flex-wrap:wrap; }
+.tab { background:#2a2a2a; border:none; color:#ccc; padding:0.6rem 1.2rem; cursor:pointer; border-radius:8px 8px 0 0; }
+.tab.active { background:#58cc02; color:#0d0d0d; }
+
+.view { display:none; padding:1.2rem; }
+.view.active { display:block; }
+
+.btn { border:none; border-radius:8px; padding:0.5rem 1.2rem; cursor:pointer; margin:0.3rem; font-weight:bold; }
+.btn.primary { background:#58cc02; color:#0d0d0d; }
+.btn.secondary { background:#3a3a3a; color:#fff; }
+
+/* DJ */
+.decks { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1rem; }
+.deck { background:#1a1a1a; border-radius:12px; padding:1rem; text-align:center; flex:1; }
+.crossfader-zone { display:flex; flex-direction:column; align-items:center; }
+#crossfader { writing-mode:bt-lr; -webkit-appearance:slider-vertical; height:150px; width:30px; }
+
+canvas { width:100%; max-width:600px; background:#1a1a1a; border-radius:8px; margin:1rem auto; display:block; }
+
+/* Beat */
+#sequencer { margin:1rem 0; }
+.track { display:flex; align-items:center; margin:0.3rem 0; gap:0.5rem; }
+.track span { width:50px; }
+.steps { display:flex; gap:2px; }
+.step { width:28px; height:28px; background:#2a2a2a; border-radius:4px; cursor:pointer; }
+.step.active { background:#58cc02; }
+.step.current { box-shadow:0 0 0 2px white; }
 
 /* Mixer */
-.channel-strips{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;}
-.channel{background:#1f1f1f;border-radius:12px;padding:0.8rem;display:flex;flex-direction:column;align-items:center;gap:0.3rem;width:80px;}
-input[type="range"]{width:100%;}
-.mute-btn,.solo-btn{width:28px;height:28px;border-radius:50%;background:#2a2a2a;border:none;color:#fff;cursor:pointer;}
-.mute-btn.active,.solo-btn.active{background:#f00;}
-
-canvas{width:100%;max-width:600px;background:#1f1f1f;border-radius:8px;margin:1rem 0;}
+.channel-strips { display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap; }
+.channel { background:#1a1a1a; border-radius:12px; padding:0.8rem; display:flex; flex-direction:column; align-items:center; gap:0.3rem; width:85px; }
+input[type="range"] { width:100%; }
+.mute-btn,.solo-btn { width:28px; height:28px; border-radius:50%; background:#2a2a2a; border:none; color:white; cursor:pointer; }
+.mute-btn.active { background:#f00; }
+.solo-btn.active { background:#ff0; }
 
 /* Mastering */
-.eq-section,.compressor-section{margin:1rem 0;}
-.eq-band,.compressor-section label{display:block;margin:0.5rem 0;}
+.eq-band,.compressor label { display:block; margin:0.5rem 0; }
