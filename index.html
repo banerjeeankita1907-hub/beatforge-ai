@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BeatForge AI – Ultimate Music Studio</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BeatForge AI Pro – DJ, Producer & Mastering Engineer</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <div id="app">
     <header>
-      <h1>🎛️ BeatForge AI</h1>
+      <h1>🎛️ BeatForge AI Pro</h1>
       <nav id="tabs">
-        <button class="tab active" data-view="dj">🎧 DJ</button>
-        <button class="tab" data-view="beat">🥁 Beat</button>
+        <button class="tab active" data-view="dj">🎧 DJ Mixer</button>
+        <button class="tab" data-view="beat">🥁 Beat Maker</button>
         <button class="tab" data-view="composer">🤖 AI Composer</button>
         <button class="tab" data-view="mixer">🎚️ Mixer</button>
-        <button class="tab" data-view="master">🔊 Master</button>
+        <button class="tab" data-view="master">🔊 Mastering</button>
       </nav>
     </header>
 
     <!-- DJ Mixer View -->
     <section id="dj" class="view active">
-      <div class="deck" id="deck-a">
-        <h3>Deck A</h3>
-        <button class="btn play-btn" data-deck="a">▶ Play</button>
-        <input type="range" min="0.5" max="2" step="0.01" value="1" class="speed" data-deck="a" />
-        <label>Speed</label>
-      </div>
-      <div class="crossfader-section">
-        <input type="range" id="crossfader" min="0" max="1" step="0.01" value="0.5" />
-        <label>Crossfader</label>
-      </div>
-      <div class="deck" id="deck-b">
-        <h3>Deck B</h3>
-        <button class="btn play-btn" data-deck="b">▶ Play</button>
-        <input type="range" min="0.5" max="2" step="0.01" value="1" class="speed" data-deck="b" />
-        <label>Speed</label>
+      <div class="decks-row">
+        <div class="deck" id="deck-a">
+          <h3>Deck A</h3>
+          <button class="btn play-deck" data-deck="a">▶ Play</button>
+          <div class="slider-group">
+            <label>Pitch</label>
+            <input type="range" min="0.5" max="2" step="0.01" value="1" class="pitch" data-deck="a"/>
+          </div>
+        </div>
+        <div class="crossfader-section">
+          <input type="range" id="crossfader" min="0" max="1" step="0.01" value="0.5" orient="vertical"/>
+          <label>Crossfader</label>
+        </div>
+        <div class="deck" id="deck-b">
+          <h3>Deck B</h3>
+          <button class="btn play-deck" data-deck="b">▶ Play</button>
+          <div class="slider-group">
+            <label>Pitch</label>
+            <input type="range" min="0.5" max="2" step="0.01" value="1" class="pitch" data-deck="b"/>
+          </div>
+        </div>
       </div>
       <canvas id="scope-dj" width="600" height="100"></canvas>
     </section>
@@ -60,9 +66,12 @@
           <div class="steps" id="steps-clap"></div>
         </div>
       </div>
-      <button id="play-beat" class="btn primary">▶ Play Beat</button>
-      <button id="stop-beat" class="btn secondary">⏹ Stop</button>
-      <label>BPM: <input type="number" id="bpm" value="120" min="40" max="300" /></label>
+      <div class="controls">
+        <button id="play-beat" class="btn primary">▶ Play Beat</button>
+        <button id="stop-beat" class="btn secondary">⏹ Stop</button>
+        <label>BPM <input type="number" id="bpm" value="120" min="40" max="300"/></label>
+        <button id="random-beat" class="btn">🎲 Random Beat</button>
+      </div>
     </section>
 
     <!-- AI Composer View -->
@@ -70,75 +79,88 @@
       <h2>AI Melody Generator</h2>
       <button id="generate-melody" class="btn primary">✨ Generate Melody</button>
       <button id="play-melody" class="btn secondary" disabled>▶ Play Melody</button>
-      <div id="melody-notes"></div>
-      <canvas id="piano-roll" width="600" height="120"></canvas>
+      <button id="stop-melody" class="btn secondary">⏹ Stop</button>
+      <div id="melody-display"></div>
+      <canvas id="piano-roll" width="600" height="100"></canvas>
     </section>
 
     <!-- Mixer View -->
     <section id="mixer" class="view">
-      <div class="channel" data-chan="kick">
-        <label>Kick</label>
-        <input type="range" orient="vertical" min="0" max="1" step="0.01" value="0.8" class="vol" />
-        <input type="range" orient="vertical" min="-1" max="1" step="0.01" value="0" class="pan" />
-        <button class="solo-btn">S</button>
-        <button class="mute-btn">M</button>
-      </div>
-      <div class="channel" data-chan="snare">
-        <label>Snare</label>
-        <input type="range" orient="vertical" min="0" max="1" step="0.01" value="0.8" class="vol" />
-        <input type="range" orient="vertical" min="-1" max="1" step="0.01" value="0" class="pan" />
-        <button class="solo-btn">S</button>
-        <button class="mute-btn">M</button>
-      </div>
-      <div class="channel" data-chan="hihat">
-        <label>Hi‑Hat</label>
-        <input type="range" orient="vertical" min="0" max="1" step="0.01" value="0.8" class="vol" />
-        <input type="range" orient="vertical" min="-1" max="1" step="0.01" value="0" class="pan" />
-        <button class="solo-btn">S</button>
-        <button class="mute-btn">M</button>
-      </div>
-      <div class="channel" data-chan="clap">
-        <label>Clap</label>
-        <input type="range" orient="vertical" min="0" max="1" step="0.01" value="0.8" class="vol" />
-        <input type="range" orient="vertical" min="-1" max="1" step="0.01" value="0" class="pan" />
-        <button class="solo-btn">S</button>
-        <button class="mute-btn">M</button>
-      </div>
-      <div class="channel" data-chan="melody">
-        <label>Melody</label>
-        <input type="range" orient="vertical" min="0" max="1" step="0.01" value="0.7" class="vol" />
-        <input type="range" orient="vertical" min="-1" max="1" step="0.01" value="0" class="pan" />
-        <button class="solo-btn">S</button>
-        <button class="mute-btn">M</button>
-      </div>
-      <div class="channel master-chan">
-        <label>Master</label>
-        <input type="range" orient="vertical" min="0" max="1" step="0.01" value="0.9" id="master-vol" />
+      <div class="channel-strips">
+        <div class="channel" data-chan="kick">
+          <label>Kick</label>
+          <input type="range" min="0" max="1" step="0.01" value="0.9" class="vol"/>
+          <input type="range" min="-1" max="1" step="0.01" value="0" class="pan"/>
+          <button class="mute-btn">M</button>
+          <button class="solo-btn">S</button>
+          <input type="range" min="0" max="1" step="0.01" value="0" class="send-reverb"/>
+          <input type="range" min="0" max="1" step="0.01" value="0" class="send-delay"/>
+        </div>
+        <div class="channel" data-chan="snare">
+          <label>Snare</label>
+          <input type="range" min="0" max="1" step="0.01" value="0.9" class="vol"/>
+          <input type="range" min="-1" max="1" step="0.01" value="0" class="pan"/>
+          <button class="mute-btn">M</button>
+          <button class="solo-btn">S</button>
+          <input type="range" min="0" max="1" step="0.01" value="0.15" class="send-reverb"/>
+          <input type="range" min="0" max="1" step="0.01" value="0" class="send-delay"/>
+        </div>
+        <div class="channel" data-chan="hihat">
+          <label>Hi‑Hat</label>
+          <input type="range" min="0" max="1" step="0.01" value="0.7" class="vol"/>
+          <input type="range" min="-1" max="1" step="0.01" value="0" class="pan"/>
+          <button class="mute-btn">M</button>
+          <button class="solo-btn">S</button>
+          <input type="range" min="0" max="1" step="0.01" value="0.1" class="send-reverb"/>
+          <input type="range" min="0" max="1" step="0.01" value="0.2" class="send-delay"/>
+        </div>
+        <div class="channel" data-chan="clap">
+          <label>Clap</label>
+          <input type="range" min="0" max="1" step="0.01" value="0.8" class="vol"/>
+          <input type="range" min="-1" max="1" step="0.01" value="0" class="pan"/>
+          <button class="mute-btn">M</button>
+          <button class="solo-btn">S</button>
+          <input type="range" min="0" max="1" step="0.01" value="0.2" class="send-reverb"/>
+          <input type="range" min="0" max="1" step="0.01" value="0.1" class="send-delay"/>
+        </div>
+        <div class="channel" data-chan="melody">
+          <label>Melody</label>
+          <input type="range" min="0" max="1" step="0.01" value="0.8" class="vol"/>
+          <input type="range" min="-1" max="1" step="0.01" value="0" class="pan"/>
+          <button class="mute-btn">M</button>
+          <button class="solo-btn">S</button>
+          <input type="range" min="0" max="1" step="0.01" value="0.3" class="send-reverb"/>
+          <input type="range" min="0" max="1" step="0.01" value="0.25" class="send-delay"/>
+        </div>
+        <div class="channel master-chan">
+          <label>Master</label>
+          <input type="range" min="0" max="1" step="0.01" value="1" id="master-vol" class="vol"/>
+        </div>
       </div>
     </section>
 
     <!-- Mastering View -->
     <section id="master" class="view">
       <h2>Mastering Chain</h2>
-      <div class="eq-band">
-        <label>Low (60Hz)</label>
-        <input type="range" min="-12" max="12" value="0" class="eq-gain" data-freq="60" />
+      <div class="eq-section">
+        <div class="eq-band">
+          <label>Low (60 Hz)</label>
+          <input type="range" min="-12" max="12" value="0" class="eq-gain" data-freq="60"/>
+        </div>
+        <div class="eq-band">
+          <label>Mid (1 kHz)</label>
+          <input type="range" min="-12" max="12" value="0" class="eq-gain" data-freq="1000"/>
+        </div>
+        <div class="eq-band">
+          <label>High (8 kHz)</label>
+          <input type="range" min="-12" max="12" value="0" class="eq-gain" data-freq="8000"/>
+        </div>
       </div>
-      <div class="eq-band">
-        <label>Mid (1000Hz)</label>
-        <input type="range" min="-12" max="12" value="0" class="eq-gain" data-freq="1000" />
+      <div class="compressor-section">
+        <label>Threshold <input type="range" min="-60" max="0" value="-24" id="comp-threshold"/></label>
+        <label>Ratio <input type="range" min="1" max="20" value="4" id="comp-ratio"/></label>
       </div>
-      <div class="eq-band">
-        <label>High (8000Hz)</label>
-        <input type="range" min="-12" max="12" value="0" class="eq-gain" data-freq="8000" />
-      </div>
-      <div class="compressor">
-        <label>Threshold</label>
-        <input type="range" min="-60" max="0" value="-24" id="comp-threshold" />
-        <label>Ratio</label>
-        <input type="range" min="1" max="20" value="4" id="comp-ratio" />
-      </div>
-      <button id="export-audio" class="btn primary">🔊 Export Track</button>
+      <button id="export-audio" class="btn primary">🔊 Export Track (8s)</button>
     </section>
   </div>
 
